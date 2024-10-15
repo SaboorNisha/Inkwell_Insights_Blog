@@ -23,9 +23,3 @@ Welcome to the **Inkwell Insights Blog**! This project is a personal blog page w
 - Python 3.x
 - Flask,SqlAlchemy
 - A text editor or IDE (e.g., VS Code, PyCharm)
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/inkwell_insights_blog.git
