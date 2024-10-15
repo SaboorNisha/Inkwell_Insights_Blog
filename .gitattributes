@@ -1,0 +1,8 @@
+# Set the default behavior to automatically normalize line endings.
+* text=auto
+
+# Explicitly declare text files you want to always have LF line endings on checkin.
+*.py text eol=lf
+
+# For Windows users, you can also enforce CRLF for specific files if needed.
+*.bat text eol=crlf
