@@ -1,0 +1,40 @@
+{% include "home.html" %}
+
+
+<form action="{{url_for ('edit', id=edit.id)}}" method="POST">
+
+
+
+<div class="container mt-5" style="padding-bottom: 50px;"> <!-- Centering the card in the container -->
+    <div class="card p-5" style="max-width: 700px; margin: auto; background-color: #D3D3D3; height: 630px; "> <!-- Bootstrap card with max width -->
+        <h3 class="card-title text-center">Make Changes On Your Blog!</h3> <!-- Title for the form -->
+        <form>
+            <div class="mb-3 col-sm-20"> <!-- Full width within the card -->
+                <label for="title" class="form-label"><b>Title</b></label>
+                <input type="text" class="form-control" id="title" placeholder="" name="title" value="{{ edit.Title }}">
+            </div>
+            <div class="mb-3 col-sm-20">
+                <label for="author" class="form-label"><b>Author</b></label>
+                <input type="text" class="form-control" id="author" placeholder="" name="author" value="{{ edit.Author }}">
+            </div>
+            <div class="mb-3 col-sm-20">
+                <label for="email" class="form-label"><b>E-mail</b></label>
+                <input type="email" class="form-control" id="email" placeholder="" name="email" value="{{ edit.Email }}">
+            </div>
+            <div class="mb-3 col-sm-20">
+                <label for="slug" class="form-label"><b>Slug</b></label>
+                <input type="text" class="form-control" id="slug" placeholder="" name="slug" value="{{ edit.Slug }}">
+            </div>
+            <div class="mb-3 col-sm-20">
+                <label for="blog" class="form-label"><b>Blog</b></label>
+                <textarea class="form-control" id="blog" rows="3" name="blog" value="">{{ edit.blog_post }}</textarea>
+            </div>
+            <div class="mb-3 text-center">
+                <button type="submit" class="btn btn-success">Submit</button> <!-- Submit button -->
+            </div>
+        </form>
+    </div>
+</div>
+
+
+</form>

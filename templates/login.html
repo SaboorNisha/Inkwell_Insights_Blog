@@ -1,64 +1,54 @@
 {% include "home.html" %}
 
-
-<form action="{{ url_for ('login')}}" method="POST">
-
-
-
-<div class="container mt-5" style="padding-bottom: 50px;"> <!-- Centering the card in the container -->
-    <div class="card p-5" style="max-width: 700px; margin: auto; background-color: #D3D3D3; height: 630px; "> <!-- Bootstrap card with max width -->
-        <h3 class="card-title text-center">Login</h3> <!-- Title for the form -->
-        <form>
-            <div class="mb-3 col-sm-20"> <!-- Full width within the card -->
+<form action="{{ url_for('login') }}" method="POST">
+    <div class="container mt-5" style="padding-bottom: 50px;">
+        <div class="card p-5" style="max-width: 700px; margin: auto; background-color: #D3D3D3; height: 630px;">
+            <h3 class="card-title text-center">Login</h3>
+            <div class="mb-3 col-sm-20">
                 <label for="username" class="form-label"><b>Username</b></label>
-                <input type="text" class="form-control" id="username" placeholder="" name="username">
+                <input type="text" class="form-control" id="username" name="username" required>
             </div>
             <div class="mb-3 col-sm-20">
                 <label for="name" class="form-label"><b>Name</b></label>
-                <input type="text" class="form-control" id="name" placeholder="" name="name">
+                <input type="text" class="form-control" id="name" name="name" required>
             </div>
             <div class="mb-3 col-sm-20">
                 <label for="email" class="form-label"><b>E-mail</b></label>
-                <input type="email" class="form-control" id="email" placeholder="" name="email">
+                <input type="email" class="form-control" id="email" name="email" required>
             </div>
             <div class="mb-3 col-sm-20">
                 <label for="password" class="form-label"><b>Password</b></label>
-                <input type="password" class="form-control" id="password" placeholder="" name="password">
+                <input type="password" class="form-control" id="password" name="password" required>
             </div>
-            <!-- <div class="mb-3 col-sm-20">
-                <label for="blog" class="form-label"><b>Confirm Password</b></label>
-                <textarea class="form-control" id="blog" rows="3" name="blog"></textarea>
-            </div> -->
             <div class="mb-3 text-center">
                 <button class="btn btn-success">Submit</button> 
             </div>
-        </form>
+        </div>
     </div>
-</div>
-
 </form>
-    <div class="container">
-        <table class="table">
-            <thead class="thead-light">
+
+
+<div class="container mt-4"> <!-- Adds spacing and centers the table within a container -->
+    <table class="table table-striped table-hover table-bordered" style="width: 80%; margin: 0 auto;">
+        <thead class="thead-dark"> <!-- Changed to dark theme for better contrast -->
             <tr>
-                <th scope="col">id</th>
-                <th scope="col">Username</th>
+                <th scope="col thead-dark">Username</th>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
-                <th scope="col">Password</th>
+                <th scope="col">Password</th> <!-- Password header remains, cell hidden below -->
             </tr>
-            </thead>
-            
-            <tbody>
+        </thead>
+        <tbody>
             {% for log in logs %} 
             <tr>
-                <th scope="row">{{ log.id }}</th>
                 <td>{{ log.Username }}</td>
                 <td>{{ log.Name }}</td>
                 <td>{{ log.Email }}</td>
-                <td>{{ log.Password }}</td>
+                <td class="text-muted">Hidden</td> <!-- Display hidden for the password -->
             </tr>
             {% endfor %}
-            </tbody>
-        </table>
-    </div>
+        </tbody>
+    </table>
+</div>
+
+
