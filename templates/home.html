@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>BLOG PAGE</title>
   </head>
-        <body style="background-color:darkgrey;">
+        <body style="background-color:darkgray;">
           
           
           <nav class="navbar navbar-expand-lg" style="background-color: #D3D3D3;">
             <div class="container-fluid">
-              <a class="navbar-brand" href="/">Navbar</a>
+              <a class="navbar-brand" href="/">Welcome</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -21,32 +21,42 @@
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{{url_for ('link')}}">Create New</a>
+                    <a class="nav-link active" aria-current="page" href="{{url_for ('signup')}}">Signup</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{url_for ('login')}}">login</a>
+                    <a class="nav-link active" aria-current="page" href="{{url_for ('login')}}">Login</a>
+                  </li>
+                
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{url_for ('link')}}">Create New</a>
                   </li>
                 </ul>
                 <form class="d-flex" role="search">
                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-warning" type="submit">Search</button>
+                  <button class="btn btn-info" type="submit">Search</button>
                 </form>
               </div>
             </div>
           </nav>
           <br>
-          <center style="color:darkmagenta;">
+          <center style="color:rgb(15, 2, 15);">
           <h1>Express your ideas the way you like!</h1>
           <h5>Craft a beautiful and distinctive blog without hassle...</h5>
         </center>
-          <br>
 
           <center>
-            {% for message in get_flashed_messages() %}
-            <div class="alert alert-warning" role="alert" style="width: 70%;">
-              {{ message }}
-            </div>
-            {% endfor %}
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div style="width: 70%;">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
             </center>
 
     {% for user in users | reverse %}
@@ -59,8 +69,11 @@
                   <h4 class="card-body"><b>Author:</b> {{ user.Author }}</h4>
                   <h5 class="card-text d-none" id="blogContent">{{ user.blog_post }}</h5> <!-- Hide blog content initially -->
                   <br>
-                  <button class="btn btn-success" onclick="location.href='{{ url_for('blog', id=user.id) }}'">View Blog</button> <!-- Button to go to blog page -->
+                  <!-- <button class="btn btn-success" onclick="location.href='{{ url_for('blog', id=user.id) }}'">View Blog</button> -->
                   <!-- Button to toggle blog content -->
+                  <form action="{{ url_for('blog', id=user.id) }}" >
+                    <button type="submit" class="btn btn-success" >View Blog</button>
+                </form>
               </div>
           </div>
       </div>

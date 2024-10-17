@@ -1,17 +1,17 @@
 {% include "home.html" %}
 
-<form action="{{ url_for('login') }}" method="POST">
+<form action="{{ url_for('signup') }}" method="POST">
     <div class="container mt-5" style="padding-bottom: 50px;">
-        <div class="card p-5" style="max-width: 700px; margin: auto; background-color: #b0a5da; ">
-            <h3 class="card-title text-center">login</h3>
-            <!-- <div class="mb-3 col-sm-20">
+        <div class="card p-5" style="max-width: 700px; margin: auto; background-color: #e0b5b5; height: 600px;">
+            <h3 class="card-title text-center">Signup</h3>
+            <div class="mb-3 col-sm-20">
                 <label for="username" class="form-label"><b>Username</b></label>
                 <input type="text" class="form-control" id="username" name="username" required>
             </div>
             <div class="mb-3 col-sm-20">
                 <label for="name" class="form-label"><b>Name</b></label>
                 <input type="text" class="form-control" id="name" name="name" required>
-            </div> -->
+            </div>
             <div class="mb-3 col-sm-20">
                 <label for="email" class="form-label"><b>E-mail</b></label>
                 <input type="email" class="form-control" id="email" name="email" required>
@@ -22,7 +22,6 @@
             </div>
             <div class="mb-3 text-center">
                 <button class="btn btn-success">Submit</button> 
-                <a href="{{ url_for('signup') }}" class="btn btn-primary">Signup</a>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-<body style="background-color: darkgrey;">
+<body style="background-color: rgb(152, 212, 167);">
   <div class="row justify-content-center" style="padding-top: 40px;">
       <div class="col-sm-8 mb-3 mb-sm-0">
           <div class="card" style="background-color: #D3D3D3; border-radius: 30px;">
@@ -8,12 +8,12 @@
                   <h5 class="card-text">{{ blog.blog_post }}</h5> <!-- Blog content -->
 
                   <br>
-                  <button class="btn btn-warning" onclick="location.href='{{ url_for('home') }}'">Back</button>
+                  <a href="{{ url_for('home') }}" class="btn btn-warning">Back</a>
 
-                  <button class="btn btn-success" onclick="location.href='{{ url_for('edit', id=blog.id) }}'" style="margin-left: 70%;">Edit</button>
+                  <a href="{{ url_for('edit', id=blog.id) }}" class="btn btn-success" style="margin-left: 70%;">Edit</a>
 
                   <!-- Delete action wrapped in a form to use POST method -->
-                  <form action="{{ url_for('delete_', id=blog.id) }}" method="POST" style="display: inline;">
+                  <form action="{{ url_for('delete_blog', id=blog.id) }}" method="POST" style="display: inline;">
                       <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this blog post?');">Delete</button>
                   </form>
               </div>
