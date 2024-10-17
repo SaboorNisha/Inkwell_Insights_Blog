@@ -6,7 +6,7 @@ Welcome to the **Inkwell Insights Blog**! This project is a personal blog page w
 
 - **User-Friendly Interface**: Easy navigation to explore different blog posts.
 - **Responsive Design**: Works seamlessly on various devices (desktop, tablet, mobile).
-- **Post Creation**: Users can create, edit, and delete their own blog posts.
+- **Post Creation and Edit , Delete Feature**: Users can create, edit, and delete their own blog posts.
 - **Search Functionality**: Quickly find posts based on keywords.
 - **Password Hashing**: To Hide our Passwords for Security purpose.
 - **login/signup Features**: To User Authentication pupose.
