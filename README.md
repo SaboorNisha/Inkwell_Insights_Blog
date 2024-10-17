@@ -9,6 +9,7 @@ Welcome to the **Inkwell Insights Blog**! This project is a personal blog page w
 - **Post Creation**: Users can create, edit, and delete their own blog posts.
 - **Search Functionality**: Quickly find posts based on keywords.
 - **Password Hashing**: To Hide our Passwords for Security purpose.
+- **login/signup Features**: To User Authentication pupose.
 
 ## 💻 Technologies Used
 
