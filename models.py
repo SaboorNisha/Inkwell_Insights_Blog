@@ -1,9 +1,11 @@
 import os
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
+from flask_login import UserMixin
 from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Flask
+
 
 db = SQLAlchemy()
 app = Flask(__name__)
@@ -30,7 +32,9 @@ class Post(db.Model):
     def __repr__(self):
         return f'<Post {self.Title}>'
         
-class User(db.Model):
+class User(UserMixin,db.Model):
+    __tablename__ = 'user'
+
     id = db.Column(db.Integer, primary_key=True)
     Username = db.Column(db.String(500), nullable=False)
     Name = db.Column(db.String(100), nullable=False)

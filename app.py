@@ -1,20 +1,41 @@
 
 from flask import render_template, request, flash,redirect, url_for, session
 from models import db, Post, User, app, check_password_hash
-from flask_login import LoginManager, login_required, login_user, logout_user
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+
+
+# Initialize LoginManager
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'  # Redirects to login page if user is not logged in
+
+# load_user function for Flask-Login
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    session['unauthorized_access'] = True
+    # Flash the message when the user is not authorized
+    flash('Please login to access this page.', 'danger')
+    return redirect('/login')
 
 
 @app.route('/')
+@login_required
 def home():
     user = Post.query.limit(100).all()
     return render_template('home.html', users=user)
 
 @app.route('/blog/<int:id>')
+@login_required
 def blog(id):
     blog = Post.query.get_or_404(id)
     return render_template ('blog.html', blog=blog)
 
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
 def edit(id):
     edit= Post.query.get_or_404(id)
     if request.method == "POST":
@@ -41,6 +62,7 @@ def edit(id):
     return render_template('edit.html', edit=edit)
 
 @app.route('/delete_blog/<int:id>',methods=['GET','POST'])
+@login_required
 def delete_blog(id):
     delete_blog = Post.query.get_or_404(id)
 
@@ -53,6 +75,7 @@ def delete_blog(id):
      
 
 @app.route('/link', methods=["GET", "POST"])
+@login_required
 def link():
     if request.method == "POST":
         title = request.form['title']
@@ -89,6 +112,7 @@ def signup():
             db.session.commit()
 
             flash("Signup is Done.", "success")
+            return redirect('/')
         else:
             if user is not None:
                 flash(f'Username {user_name} is already exists', 'danger')
@@ -96,6 +120,8 @@ def signup():
                 flash(f'Email {user_email} is already exists', 'danger')
             else:
                 flash('An error occurred. Please try again.', 'danger')
+
+        
 
     return render_template('signup.html', signs=sign)
 
@@ -112,18 +138,32 @@ def login():
         user = User.query.filter_by(Email=user_email).first()
 
         # Validate user credentials
-        if user and check_password_hash(user.Password, password):
+        if user :
+            if check_password_hash(user.Password, password):
             # If the credentials are valid, log the user in
-            session['user_id'] = user.id  # Store the user's ID in the session
-            flash('Login successful!', 'success')
-            return redirect(url_for('home'))  # Redirect to the home page
+                session.pop('unauthorized_access', None)
+
+                # If the credentials are valid, log the user in
+                login_user(user)
+                
+                flash('Login successful!', 'success')
+                return redirect(url_for('home'))  # Redirect to the home page
+            else:
+                # If the credentials are invalid, show an error message
+                flash('Invalid email or password. Please try again.', 'danger')
         else:
-            # If the credentials are invalid, show an error message
-            flash('Invalid email or password. Please try again.', 'danger')
+            flash(("useremail {} doesn't exists").format(user_email))
+        
 
     # Render the login page for GET requests
     return render_template('login.html')
     
+@app.route('/logout')
+@login_required  # Restricting access to logged-in users only
+def logout():
+    logout_user()  # Logs the user out
+    flash('You have been logged out.', 'info')
+    return redirect('/login')
 
 if __name__ == '__main__':
     app.run(debug=True)
