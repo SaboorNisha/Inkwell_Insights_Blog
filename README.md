@@ -2,7 +2,7 @@
 
 Welcome to the **Inkwell Insights Blog**! This project is a personal blog page where you can share your thoughts, ideas, and insights with the world. 
 
-## 📖 Features
+### 📖 Features
 
 - **User-Friendly Interface**: Easy navigation to explore different blog posts.
 - **Responsive Design**: Works seamlessly on various devices (desktop, tablet, mobile).
@@ -11,7 +11,7 @@ Welcome to the **Inkwell Insights Blog**! This project is a personal blog page w
 - **Password Hashing**: To Hide our Passwords for Security purpose.
 - **login/signup Features**: To User Authentication pupose.
 
-## 💻 Technologies Used
+### 💻 Technologies Used
 
 - **Frontend**: HTML, CSS, Bootstrap
 - **Backend**: Flask 
@@ -19,7 +19,7 @@ Welcome to the **Inkwell Insights Blog**! This project is a personal blog page w
 
 
 
-### Prerequisites
+#### Prerequisites
 
 - Python 3.x
 - Flask,SqlAlchemy
