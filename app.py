@@ -112,7 +112,7 @@ def signup():
             db.session.commit()
 
             flash("Signup is Done.", "success")
-            return redirect('/')
+            return redirect('home')
         else:
             if user is not None:
                 flash(f'Username {user_name} is already exists', 'danger')
