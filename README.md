@@ -2,6 +2,8 @@
 
 Welcome to the **Inkwell Insights Blog**! This project is a personal blog page where you can share your thoughts, ideas, and insights with the world. 
 
+--------------------------------------------------------------------------------------------
+
 ## 📖 Features
 
 - **User-Friendly Interface**: Easy navigation to explore different blog posts.
@@ -9,17 +11,20 @@ Welcome to the **Inkwell Insights Blog**! This project is a personal blog page w
 - **Post Creation**: Users can create, edit, and delete their own blog posts.
 - **Search Functionality**: Quickly find posts based on keywords.
 - **Password Hashing**: To Hide our Passwords for Security purpose.
-
+  
 ## 💻 Technologies Used
 
 - **Frontend**: HTML, CSS, Bootstrap
 - **Backend**: Flask 
 - **Database**: SQLite
 
-
-
 ### Prerequisites
 
 - Python 3.x
 - Flask,SqlAlchemy
 - A text editor or IDE (e.g., VS Code, PyCharm)
+ -----------------------------------------------------------
+ 
+## Contributing
+**Your contributions are valuable! Whether you've found a bug or have suggestions for improvements, feel free to open an issue or submit a pull request. Your input helps make this application better for everyone.**
+
