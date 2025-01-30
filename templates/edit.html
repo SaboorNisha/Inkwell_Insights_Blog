@@ -8,7 +8,7 @@
 <div class="container mt-5" style="padding-bottom: 50px;"> <!-- Centering the card in the container -->
     <div class="card p-5" style="max-width: 700px; margin: auto; background-color: #9c8edb; height: 630px; "> <!-- Bootstrap card with max width -->
         <h3 class="card-title text-center">Make Changes On Your Blog!</h3> <!-- Title for the form -->
-        <form>
+        <form method="post">
             <div class="mb-3 col-sm-20"> <!-- Full width within the card -->
                 <label for="title" class="form-label"><b>Title</b></label>
                 <input type="text" class="form-control" id="title" placeholder="" name="title" value="{{ edit.Title }}">
