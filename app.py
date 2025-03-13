@@ -1,5 +1,5 @@
 from flask import render_template, request, flash, redirect, url_for, session
-from models import db, Post, User, app, check_password_hash
+from models import db, Post, User, Reaction, app, check_password_hash
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 
 # Initialize LoginManager
@@ -22,8 +22,8 @@ def unauthorized():
 @app.route('/')
 @login_required
 def home():
-    user = Post.query.all()
-    return render_template('home.html', users=user)
+    posts = Post.query.all()
+    return render_template('home.html', users=posts)
 
 @app.route('/blog/<int:id>')
 @login_required
@@ -66,6 +66,52 @@ def delete_blog(id):
     flash("Blog was deleted successfully.", 'success')
     return redirect('/')
 
+@app.route('/react/<int:post_id>/<string:reaction_type>', methods=['POST'])
+@login_required
+def react(post_id, reaction_type):
+    post = Post.query.get_or_404(post_id)
+    existing_reaction = Reaction.query.filter_by(post_id=post_id, user_id=current_user.id).first()
+
+    if existing_reaction:
+        if existing_reaction.reaction_type == reaction_type:
+            # Remove the reaction if the user clicks the same button again
+            db.session.delete(existing_reaction)
+            db.session.commit()
+        else:
+            # Update reaction type if the user switches from like to dislike or vice versa
+            existing_reaction.reaction_type = reaction_type
+            db.session.commit()
+    else:
+        # Add a new reaction
+        new_reaction = Reaction(post_id=post_id, user_id=current_user.id, reaction_type=reaction_type)
+        db.session.add(new_reaction)
+        db.session.commit()
+
+    # Recalculate like and dislike counts
+    like_count = Reaction.query.filter_by(post_id=post_id, reaction_type='like').count()
+    dislike_count = Reaction.query.filter_by(post_id=post_id, reaction_type='dislike').count()
+
+    # Update the Post model
+    post.like_count = like_count
+    post.dislike_count = dislike_count
+    db.session.commit()
+
+    flash('Reaction updated!', 'success')
+    return redirect(url_for('home'))
+
+@app.route('/search', methods=['GET'])
+@login_required
+def search():
+    query = request.args.get('query', '')
+    search_results = Post.query.filter(
+        Post.Title.like(f'%{query}%') |
+        Post.blog_post.like(f'%{query}%')
+    ).all()
+
+    return render_template('search_result.html', results=search_results, query=query)
+
+
+
 @app.route('/link', methods=["GET", "POST"])
 @login_required
 def link():
@@ -103,7 +149,7 @@ def signup():
             db.session.commit()
 
             flash("Signup is Done.", "success")
-            return redirect('home')
+            return redirect(url_for('home'))
         else:
             if user is not None:
                 flash(f'Username {user_name} already exists', 'danger')
@@ -151,4 +197,4 @@ def logout():
     return redirect('/login')
 
 if __name__ == '__main__':
-    app.run(debug=True, host='127.0.0.1', port=5003)
+    app.run(debug=True, host='127.0.0.1', port=5002)
