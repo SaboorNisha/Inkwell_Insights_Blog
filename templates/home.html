@@ -44,19 +44,26 @@
         color: black;
         font-weight: bold;
     }
+
+    .d-flex {
+        margin-left: 200px;
+    }
+    .form-control {
+        width: 500px;
+    }
 </style>
 <body style="background-color: darkgray;">
 
     <nav class="navbar navbar-expand-lg" style="background-color: #D3D3D3;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">Home</a>
+            <a class="navbar-brand" href="/"><b>Home</b></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Blogs</a>
+                        <a class="nav-link active" aria-current="page" href="/"><b>Blogs</b></a>
                     </li>
                     {% if not current_user.is_authenticated %}
                         <!-- <li class="nav-item">
@@ -67,18 +74,19 @@
                         </li> -->
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('link') }}">Create New</a>
+                            <a class="nav-link" href="{{ url_for('link') }}"><b>Create New</b></a>
                         </li>
+                        <form action="{{ url_for('search') }}" class="d-flex" role="search">
+                            <input class="form-control me-3" name="query" type="search" placeholder="Looking for something?" aria-label="Search">
+                            <button class="btn btn-primary" type="submit">Search</button>
+                        </form>
                     {% endif %}   
                 </ul>
-                <form action="{{ url_for('search') }}" class="d-flex" role="search">
-                    <input class="form-control me-3" name="query" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                
                 <div class="d-flex">
                     {% if current_user.is_authenticated %}
                         <span class="navbar-text me-3 ms-5">
-                            Welcome, {{ current_user.Name }}
+                           <i> Welcome, <b> {{ current_user.Name }} </i></b>
                         </span>
                         <a class="btn btn-danger" href="{{ url_for('logout') }}">Logout</a>
                     {% else %}
@@ -91,7 +99,7 @@
     </nav>
 
     <br>
-    <center style="color: rgb(15, 2, 15);">
+    <center style="color: rgb(15, 2, 15); font-style: italic; font-size: larger;">
         <h1>Express your ideas the way you like!</h1>
         <h5>Craft a beautiful and distinctive blog without hassle...</h5>
     </center>

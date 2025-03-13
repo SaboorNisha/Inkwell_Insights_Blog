@@ -1,9 +1,9 @@
 {% include "home.html" %}
 
 <form action="{{ url_for('login') }}" method="POST">
-    <div class="container mt-5" style="padding-bottom: 50px;">
-        <div class="card p-5" style="max-width: 700px; margin: auto; background-color: #b0a5da; ">
-            <h3 class="card-title text-center">login</h3>
+    <div class="container mt-5" style="padding-bottom: 50px; ">
+        <div class="card p-5" style="max-width: 600px; margin: auto; background-color: #b0a5da; border-radius: 40px;">
+            <h3 class="card-title text-center"><i>login</i></h3>
             <!-- <div class="mb-3 col-sm-20">
                 <label for="username" class="form-label"><b>Username</b></label>
                 <input type="text" class="form-control" id="username" name="username" required>
@@ -15,15 +15,16 @@
 
         
             <div class="mb-3 col-sm-20">
-                <label for="email" class="form-label"><b>E-mail</b></label>
+                <label for="email" class="form-label"><b><i>E-mail</i></b></label>
                 <input type="email" class="form-control" id="email" name="email" required>
             </div>
             <div class="mb-3 col-sm-20">
-                <label for="password" class="form-label"><b>Password</b></label>
+                <label for="password" class="form-label"><b><i>Password</i></b></label>
+                
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
             <div class="mb-3 text-center">
-                <button class="btn btn-success">Submit</button> 
+                <button class="btn btn-success"><i>Submit</i></button> 
                 <!-- <a href="{{ url_for('signup') }}" class="btn btn-primary">Signup</a>
                 <a href="{{ url_for('logout') }}" class="btn btn-danger">logout</a> -->
             </div>
